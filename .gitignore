@@ -1,0 +1,4 @@
+#excluyo env
+env/*
+#excluyo .pyc files en webapp
+webapp/*.pyc

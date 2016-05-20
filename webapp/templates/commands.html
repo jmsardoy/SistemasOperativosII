@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block main_title %}
+
+	 Comandos
+
+{% endblock %}
+
+{% block main_content %}
+
+	<div class="form-group">
+		<form action="" method="post">
+			<div class="row">
+				<div class="col-md-4">{{form.getTelemetry(class_='form-control')}}</div>
+				<div class="col-md-4">{{form.getDatta(class_='form-control')}}</div>
+				<div class="col-md-4">{{form.eraseDatta(class_='form-control')}}</div>
+				{{form.hidden_tag()}}
+			</div>
+		</form>
+	</div>
+
+	{% if data and data[0][0] != '' %}
+	<div class="table-responsive">
+		<table class="table table-hover" style="margin-top: 20px"> 
+			<tr class="active">
+				<th>Fecha</th>
+				<th>Precipitación</th>
+				<th>Humedad Relativa</th>
+				<th>Temperatura del aire (1.5m)</th>
+				<th>Temperatura del suelo(10cm)</th>
+			</tr>
+			{% for i in data %}
+				<tr>
+					{% for j in i%}
+						<td>{{j}}</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+	{% endif %}
+{% endblock %}

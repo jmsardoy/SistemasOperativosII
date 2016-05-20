@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block main_title %}
+
+	 Modulos
+
+{% endblock %}
+
+{% block main_content %}
+	<div class="form-group">
+			<div class="row">
+				<div class="col-md-6">{{modulesForm.cargarModulo(class_='form-control')}}</div>
+				<div class="col-md-6">{{modulesForm.removerModulo(class_='form-control')}}</div>
+			</div>
+
+	</div>
+
+	{% if fileForm %}
+		
+		<div class="form-group" id="fileFormDiv" style="margin-top: 60px;display:none">
+			<form action="" method="post" enctype="multipart/form-data">
+				<div class="col-md-6 col-md-offset-3">
+					<label class='form-control' for="{{fileForm.file.id}}">
+						{{fileForm.file(style='display: none')}}
+						<p id="choose" style='text-align:center'>Elegir Archivo</p>
+					</label>
+				</div>
+				<div class="col-md-6 col-md-offset-3" style="margin-top: 10px">
+					{{fileForm.cargar(class_='form-control')}}
+				</div>
+				{{fileForm.hidden_tag()}}
+			</form>
+		</div>
+	{% endif %}
+
+	{% if removeForm %}
+		<div class="form-group" id="removeFormDiv" style="margin-top: 60px; display: none">
+			<form action="" method="post"
+	>			<div class="col-md-6 col-md-offset-3">{{removeForm.select(class_='form-control')}}</div>
+				<div class="col-md-6 col-md-offset-3" style="margin-top: 10px">{{removeForm.remove(class_='form-control')}}</div>
+				{{removeForm.hidden_tag()}}
+			</form>
+		</div>
+	{% endif %}
+
+	{% if modules %}
+
+		<div class="table-responsive col-md-12" style="margin-top: 40px">
+			<h4 style="margin-bottom: 10px">Modulos Instalados</h4>
+			<table class="table table-borderer ">
+				{% for list in modules%}
+						<tr>
+							{% for module in list%}
+								<td>{{module}}</td>
+							{% endfor %}
+						</tr>
+				{% endfor %}
+			</table>
+		</div>
+	{% endif %}
+	
+	
+
+
+{% endblock %}
+
+{% block mas_scripts %}
+
+	 <script type="text/javascript" src= "{{url_for("static",filename="js/modules.js")}}"></script>
+
+{% endblock %}

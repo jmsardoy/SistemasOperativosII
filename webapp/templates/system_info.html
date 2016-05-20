@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block main_title %}
+
+	 System Info
+
+{% endblock %}
+
+{% block main_content %}
+	<div class="container" style="margin-bottom: 20px">
+      <h3> Información del sistema </h3>
+    </div>
+	{% if data %}
+	<div class="container">
+		<div class="table_responsive">
+			<table class="table table-striped" ="margin-top: 20px">
+				{% for i in data %}
+					<tr>
+						{% for j in i%}
+							<td>{{j}}</td>
+						{% endfor %}
+					</tr>
+				{% endfor %}				
+			</table>
+		</div>
+	</div>
+	{% endif %}
+
+{% endblock %}

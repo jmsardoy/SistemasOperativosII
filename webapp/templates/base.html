@@ -1,0 +1,96 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %} 
+	AWS - {% block main_title %} Main page {% endblock %}
+{% endblock %}
+
+{% block styles %}
+
+   <link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block navbar %}
+<nav class="navbar navbar-inverse" style="border-radius: 0">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="nav navbar-nav">
+      	<li><a class="btn" href="{{url_for(".home")}}">Home</a></li>
+        <li><a class="btn" href="{{url_for(".sysinfo")}}">System Info</a></li>
+        <li><a class="btn" href="{{url_for(".commands")}}">Comandos</a></li>
+        <li id="modules_btn"><a class="btn" href="{{url_for(".modules")}}">Modulos</a></li>
+      </ul>
+   
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+{% endblock %}
+  
+{% block content %}
+	
+    <div class="container" style="margin-bottom: 30px">
+      <h2 class="text-center"> Automatic Weather Station </h2>
+    </div>
+
+  <div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+            {% if category == 'message' %}
+              <div class="alert alert-warning" role="alert">
+            {% else %}
+              <div class="alert alert-{{ category }}" role="alert">
+            {% endif %}
+              {{ message }}
+            </div>
+        {% endfor %}
+      {% endif %}
+  {% endwith %}
+  </div>
+
+  <div class="container">
+		<div class="row">
+			{% block main_content %}
+			{% endblock %}
+		</div>
+	</div>
+
+  
+{% endblock %}
+
+{% block scripts %}
+  
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <!--jquery js fallback-->
+  <script>window.jQuery || document.write('<script src="{{url_for("static",filename="js/jquery.min.js")}}"><\/script>')</script>
+
+  <!--<script src="{{bootstrap_find_resource('jquery.js', cdn='jquery')}}"></script>-->
+  <script src="{{bootstrap_find_resource('js/bootstrap.js', cdn='bootstrap')}}"></script>
+  
+  <!--bootstrap js fallback-->
+  <script>if(typeof($.fn.modal) === 'undefined') {document.write('<script src="{{url_for("static",filename="js/bootstrap.min.js")}}"><\/script>')}</script>
+
+  <!--bootstrap css fallbak-->
+  <script>
+    $(document).ready(function() {
+    var bodyColor = $('body').css('color');
+    if(bodyColor != 'rgb(51, 51, 51)') {
+    $("head").prepend('<link rel="stylesheet" href="{{url_for("static",filename="css/bootstrap.min.css")}}">');}});
+  </script>
+  
+  {% block mas_scripts  %}
+  {% endblock %}
+{% endblock %}
