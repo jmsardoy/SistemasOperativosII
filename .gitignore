@@ -2,3 +2,17 @@
 env/*
 #excluyo .pyc files en webapp
 webapp/*.pyc
+#excluyo files de datos
+datos/lastData.csv
+datos/dataGen.csv
+datos/generadorDeDatos
+datos/*.o
+#excluyo files de modulo
+modulo/*.ko
+modulo/*.o
+modulo/*.order
+modulo/*.symvers
+modulo/*.cmd
+modulo/*.tmp_versions/*
+modulo/*.mod.c
+
