@@ -1,4 +1,4 @@
-{% extends "bootstrap/base.html" %}
+  {% extends "bootstrap/base.html" %}
 
 {% block title %} 
 	AWS - {% block main_title %} Main page {% endblock %}
@@ -77,7 +77,7 @@
   <!--jquery js fallback-->
   <script>window.jQuery || document.write('<script src="{{url_for("static",filename="js/jquery.min.js")}}"><\/script>')</script>
 
-  <!--<script src="{{bootstrap_find_resource('jquery.js', cdn='jquery')}}"></script>-->
+  <script src="{{bootstrap_find_resource('jquery.js', cdn='jquery')}}"></script>
   <script src="{{bootstrap_find_resource('js/bootstrap.js', cdn='bootstrap')}}"></script>
   
   <!--bootstrap js fallback-->
