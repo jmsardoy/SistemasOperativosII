@@ -25,6 +25,10 @@
 						<p id="choose" style='text-align:center'>Elegir Archivo</p>
 					</label>
 				</div>
+
+				<div class="col-md-6 col-md-offset-3" style="margin-top: 10px">
+					{{fileForm.password(class="form-control",placeholder="Contraseña",style='text-align:center')}}
+				</div>
 				<div class="col-md-6 col-md-offset-3" style="margin-top: 10px">
 					{{fileForm.cargar(class_='form-control')}}
 				</div>
@@ -37,6 +41,7 @@
 		<div class="form-group" id="removeFormDiv" style="margin-top: 60px; display: none">
 			<form action="" method="post"
 	>			<div class="col-md-6 col-md-offset-3">{{removeForm.select(class_='form-control')}}</div>
+				<div class="col-md-6 col-md-offset-3" style="margin-top: 10px">{{removeForm.password(class_='form-control',placeholder="Contraseña",style='text-align:center')}}</div>
 				<div class="col-md-6 col-md-offset-3" style="margin-top: 10px">{{removeForm.remove(class_='form-control')}}</div>
 				{{removeForm.hidden_tag()}}
 			</form>

@@ -2,6 +2,13 @@ import fcntl
 import platform
 import re
 from datetime import timedelta
+import subprocess
+from hashlib import md5
+
+
+
+UPLOAD_PATH = "uploads"
+
 
 def getTelemetry():
 	file = open("../datos/lastData.csv", "r")
@@ -29,7 +36,7 @@ def getDatta():
 def eraseDatta():
 	file = open("../datos/dataGen.csv", "w")
 	file.close()
-	file = open("..//datoslastData.csv","w")
+	file = open("../datos/lastData.csv", "w")
 	file.close()
 
 def systemInfo():
@@ -84,3 +91,42 @@ def validateFile(filename):
 	match = re.search("\.ko",filename)
 	if match:
 		return match.end()==len(filename)
+
+def saveFile(filename, file):
+	file_path = UPLOAD_PATH+"/"+filename
+	open(file_path,"w").write(file)
+
+def insmod(modname, password, PASSWORD):
+	if(hash(password) == PASSWORD):
+		file_path = UPLOAD_PATH+"/"+modname
+		password = password+'\n'
+		p = subprocess.Popen(["sudo", "-S", "insmod", file_path], stdin=subprocess.PIPE, 
+			stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		response =  p.communicate(password)
+		output = response[1]
+		p.wait()
+		if(output):
+			return (False,output)
+		else:
+			return (True,"Modulo instalado correctamente")
+	else:
+		return (False,"La clave es incorrecta")
+
+def rmmod(modname, password, PASSWORD):
+	if(hash(password) == PASSWORD):
+		password = password+'\n'
+		p = subprocess.Popen(["sudo", "-S", "rmmod", modname], stdin=subprocess.PIPE, 
+			stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		response =  p.communicate(password)
+		output = response[1]
+		p.wait()
+		if(output):
+			return (False, output)
+		else:
+			return (True, "Modulo removido correctamente")
+	else:
+		return (False, "La clave es incorrecta")
+
+def hash(password):
+	m = md5(password)
+	return m.digest()

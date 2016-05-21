@@ -9,6 +9,5 @@ $(document).ready(function(){
 	});
 	$("#file").on("change",function(){
 		$("#choose").html($(this).val());
-		console.log($(this).val());
 	});
 });
