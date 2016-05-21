@@ -29,7 +29,7 @@ def getDatta():
 	file.close()
 	data =data.split("\n")
 	for i,telemetry in enumerate(data):
-		data[i] = telemetry.split(",")
+		data[i] = [i+1] + telemetry.split(",")
 	data.pop()
 	return data
 
