@@ -1,6 +1,6 @@
 from flask.ext.wtf import Form
 from wtforms import SubmitField, FileField, SelectField, PasswordField
-from commands import getModules
+from modules import getModules
 
 class CommandsForm(Form):
 	getTelemetry = SubmitField("Get Telemetry")

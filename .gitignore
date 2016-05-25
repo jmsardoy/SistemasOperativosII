@@ -1,12 +1,19 @@
 #excluyo env
 env/*
-#excluyo .pyc files en webapp
+
+#excluyo .pyc y .psw files en webapp
 webapp/*.pyc
+webapp/*.psw
+
+#excluyo uploads
+webapp/uploads/*
+
 #excluyo files de datos
 datos/lastData.csv
 datos/dataGen.csv
 datos/generadorDeDatos
 datos/*.o
+
 #excluyo files de modulo
 modulo/*.ko
 modulo/*.o

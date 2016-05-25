@@ -2,6 +2,8 @@ from flask import Flask, render_template, flash, request
 from flask_bootstrap import Bootstrap
 from werkzeug import secure_filename
 from commands import *
+from modules import *
+from systeminfo import *
 from forms import *
 import sys
 
@@ -9,7 +11,6 @@ import sys
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SECRET_KEY'] = "asflkg3opr"
-PASSWORD = None
 
 @app.route("/")
 def home():
@@ -48,7 +49,7 @@ def modules():
 			file = request.files[fileForm.file.name].read()
 			saveFile(file=file,filename=filename)
 			password = fileForm.password.data
-			result, output = insmod(modname=filename,password=password,PASSWORD=PASSWORD)
+			result, output = insmod(modname=filename,password=password)
 			if(result):
 				flash(output,"success")
 			else:
@@ -58,9 +59,9 @@ def modules():
 
 	removeForm = RemoveForm()
 	if removeForm.validate_on_submit() and removeForm.remove.data:
-		selectname = removeForm.select.data
 		password = removeForm.password.data
-		result, output = rmmod(modname=selectname, password=password,PASSWORD=PASSWORD)
+		selectname = removeForm.select.data
+		result, output = rmmod(modname=selectname, password=password)
 		if(result):
 			flash(output,"success")
 		else:
@@ -74,10 +75,5 @@ def modules():
 
 
 if __name__ == "__main__":
-	if(len(sys.argv) > 1):
-		PASSWORD = hash(sys.argv[1])
-		app.debug = True
-		app.run(host='0.0.0.0')
-	else: 
-		print "Debe ingresar la clave"
-		sys.exit()
+	app.debug = True
+	app.run(host='0.0.0.0')
