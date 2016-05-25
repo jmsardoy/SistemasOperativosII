@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request
+from flask import Flask, render_template, flash, request, redirect
 from flask_bootstrap import Bootstrap
 from werkzeug import secure_filename
 from commands import *
@@ -39,40 +39,46 @@ def commands():
 			eraseDatta()
 	return render_template("commands.html", form=form, data=data)
 
-@app.route("/modules", methods=['GET','POST'])
+@app.route("/modules")
 def modules():
 	
 	fileForm = FileForm()
-	if fileForm.validate_on_submit() and fileForm.cargar.data:
-		filename = fileForm.file.data.filename
-		if validateFile(filename):
-			file = request.files[fileForm.file.name].read()
-			saveFile(file=file,filename=filename)
-			password = fileForm.password.data
-			result, output = insmod(modname=filename,password=password)
-			if(result):
-				flash(output,"success")
-			else:
-				flash(output,"danger")
-		else:
-			flash("Extension de archivo incorrecta", "danger")
-
 	removeForm = RemoveForm()
-	if removeForm.validate_on_submit() and removeForm.remove.data:
-		password = removeForm.password.data
-		selectname = removeForm.select.data
-		result, output = rmmod(modname=selectname, password=password)
-		if(result):
-			flash(output,"success")
-		else:
-			flash(output,"danger")
-
 	removeForm.setChoices()
 	modulesForm = ModulesForm()
 	modules = getModules(split=6)
 	return render_template("modules.html", modulesForm=modulesForm,modules=modules,
 		fileForm=fileForm,removeForm=removeForm)
 
+
+@app.route("/insmod", methods=['POST'])
+def insmodView():
+	fileForm = FileForm()
+	filename = fileForm.file.data.filename
+	if validateFile(filename):
+		file = request.files[fileForm.file.name].read()
+		saveFile(file=file,filename=filename)
+		password = fileForm.password.data
+		result, output = insmod(modname=filename,password=password)
+		if(result):
+			flash(output,"success")
+		else:
+			flash(output,"danger")
+	else:
+		flash("Extension de archivo incorrecta", "danger")
+	return redirect("/modules")
+
+@app.route("/rmform", methods=['POST'])
+def rmmodView():
+	removeForm = RemoveForm()
+	password = removeForm.password.data
+	selectname = removeForm.select.data
+	result, output = rmmod(modname=selectname, password=password)
+	if(result):
+		flash(output,"success")
+	else:
+		flash(output,"danger")
+	return redirect("/modules")
 
 if __name__ == "__main__":
 	app.debug = True

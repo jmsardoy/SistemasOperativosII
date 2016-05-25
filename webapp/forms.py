@@ -13,12 +13,12 @@ class ModulesForm(Form):
 
 class FileForm(Form):
 	file = FileField("Elegir archivo")
-	password = PasswordField("Contrasea")
+	password = PasswordField("Clave")
 	cargar = SubmitField("Cargar")
 
 class RemoveForm(Form):
 	select = SelectField(choices=[(i[0],i[0]) for i in getModules(1)])
-	password = PasswordField("Contrasea")
+	password = PasswordField("Clave")
 	remove = SubmitField("Remover")
 
 	def setChoices(self):
