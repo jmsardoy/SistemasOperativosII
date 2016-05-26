@@ -15,8 +15,7 @@ int main(int argc, char const *argv[])
 {
 	FILE* dataFile;
 	FILE* lastData;
-	FILE* dataGenFile = fopen("dataGen.csv", "w");
-	fclose(dataGenFile);
+	FILE* dataGenFile;
 	char buffer[TAM];
 	
 	while(1){

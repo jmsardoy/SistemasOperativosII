@@ -1,9 +1,10 @@
 #excluyo env
 env/*
 
-#excluyo .pyc y .psw files en webapp
+#excluyo .pyc y .psw y .ini files en webapp
 webapp/*.pyc
 webapp/*.psw
+webapp/*.ini
 
 #excluyo uploads
 webapp/uploads/*
