@@ -30,13 +30,13 @@ def commands():
 			data =  getTelemetry()
 			if data[0][0] == '':
 				flash("No hay datos", "danger")
-		elif form.getDatta.data:
-			data = getDatta()
+		elif form.getData.data:
+			data = getData()
 			if not data:
 				flash("No hay datos", "danger")
-		elif form.eraseDatta.data:
+		elif form.eraseData.data:
 			flash("Datos borrados", "success")
-			eraseDatta()
+			eraseData()
 	return render_template("commands.html", form=form, data=data)
 
 @app.route("/modules")

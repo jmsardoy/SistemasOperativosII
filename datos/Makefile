@@ -5,4 +5,4 @@ generadorDeDatos.o: generadorDeDatos.c
 	gcc $(CFLAGS) -c generadorDeDatos.c
 
 clean:
-	rm *.o generadorDeDatos dataGen.csv lastData.csv
+	rm *.o generadorDeDatos

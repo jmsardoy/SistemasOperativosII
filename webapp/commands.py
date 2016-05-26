@@ -8,10 +8,12 @@ def getTelemetry():
 	file.close()
 	telemetry = telemetry.replace("\n", "")
 	telemetry = telemetry.split(",")
+	if telemetry[0] != "":
+		telemetry = [1] + telemetry
 	telemetryList = [telemetry]
 	return telemetryList
 
-def getDatta():
+def getData():
 	file = open("../datos/dataGen.csv", "r")
 	fcntl.flock(file, fcntl.LOCK_EX)
 	data = file.read()
@@ -23,7 +25,7 @@ def getDatta():
 	data.pop()
 	return data
 
-def eraseDatta():
+def eraseData():
 	file = open("../datos/dataGen.csv", "w")
 	file.close()
 	file = open("../datos/lastData.csv", "w")

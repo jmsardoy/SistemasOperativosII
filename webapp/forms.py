@@ -4,8 +4,8 @@ from modules import getModules
 
 class CommandsForm(Form):
 	getTelemetry = SubmitField("Get Telemetry")
-	getDatta = SubmitField("Get Datta")
-	eraseDatta = SubmitField("Erase Datta")
+	getData = SubmitField("Get Data")
+	eraseData = SubmitField("Erase Data")
 
 class ModulesForm(Form):
 	cargarModulo = SubmitField("Cargar Modulo")
