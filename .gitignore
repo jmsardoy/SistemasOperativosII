@@ -1,3 +1,4 @@
 #excluyo env
 env/*
+*.odt*
 
